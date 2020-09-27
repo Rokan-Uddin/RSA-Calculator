@@ -1,6 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import RSA from './components/RSA';
+import EDgenerate from './components/EDgenerate';
+import Message from './components/Message';
 
 const arr=[];
 function gcd(a, b) {
@@ -14,10 +15,8 @@ function populateEArray(r) {
   }
 }
 function makeD(e,r) {
-  console.log(e,r);
   for(var i=1;i<r;i++) {
     if((Math.ceil((1+(i*r))/e))===((1+(i*r))/e)){
-      console.log(((1+(i*r))/e));
       var ee=((1+(i*r))/e);
       break;
     }
@@ -62,7 +61,7 @@ class App extends React.Component {
     return (
       <div className="container">
       <h1 className="text-center mt-4">RSA Calculator </h1>
-      <RSA 
+      <EDgenerate 
       p={this.state.p}
       q={this.state.q}
       d={this.state.d}
@@ -73,6 +72,13 @@ class App extends React.Component {
       handleSubmit={this.handleSubmit}
       handleSubmit2={this.handleSubmit2}
        />
+       <Message
+      p={this.state.p}
+      q={this.state.q}
+      d={this.state.d}
+      n={this.state.n}
+      e={this.state.e}
+      r={this.state.r} />
       </div>
       );
  }

@@ -1,5 +1,5 @@
 import React from 'react';
-function RSA(props) {
+function EDgenerate(props) {
 	return(
 		<div className="container">
 			<div className="row  justify-content-center">
@@ -31,4 +31,4 @@ function RSA(props) {
 		</div>
 		);
 }
-export default RSA;
+export default EDgenerate;
