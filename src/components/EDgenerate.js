@@ -1,9 +1,11 @@
 import React from 'react';
-function EDgenerate(props) {
+class EDgenerate extends React.Component  {
+
+	render() { 
 	return(
 		<div className="container">
 			<div className="row  justify-content-center">
-			<form onSubmit={props.handleSubmit}>
+			<form onSubmit={this.props.handleSubmit}>
 				<label>P:<input className="ml-2" name="p" /></label>
 				<label>Q:<input className="ml-2" name="q" /></label>
 				<input className="ml-2" type="submit" value="Submit" />
@@ -11,24 +13,23 @@ function EDgenerate(props) {
 			</div>
 
 			<div className=" row justify-content-center">
-			<p> N: {props.n}</p>
+			<p> N: {this.props.n}</p>
 			</div>
 			<div className=" row justify-content-center">
-			<p> r: {props.r}</p>
+			<p> r: {this.props.r}</p>
 			</div>
-
-			<div className="row">
-			Enter a value for e--
-			{props.array}
+			<div className="card">
+			{this.props.array}
 			</div>
 			<div className="row">
-			<form onSubmit={props.handleSubmit2}>
+			<form onSubmit={this.props.handleSubmit2}>
 			<label> E: <input name="e" /> </label>
 			<input type="submit" value="Submit" />
 			</form>
 			</div>
-			<div className="row"> {props.d}  </div>
+			<div className="row"> {this.props.d}  </div>
 		</div>
 		);
+ }
 }
 export default EDgenerate;

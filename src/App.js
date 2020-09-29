@@ -11,7 +11,7 @@ function gcd(a, b) {
 
 function populateEArray(r) {
   for (var i = 2; i < r; ++i) {
-    if (gcd(i, r) === 1) arr.push(i);
+    if (gcd(i, r) === 1) arr.push(i+" ");
   }
 }
 function makeD(e,r) {
@@ -33,7 +33,7 @@ class App extends React.Component {
       d:undefined,
       n:undefined,
       r:undefined,
-      array:undefined
+      array:[]
     }
     this.handleSubmit = this.handleSubmit.bind(this);
      this.handleSubmit2 = this.handleSubmit2.bind(this);
