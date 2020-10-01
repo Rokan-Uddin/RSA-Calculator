@@ -1,7 +1,15 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import EDgenerate from './components/EDgenerate';
+import 'bootstrap/dist/js/bootstrap.bundle'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import VariableGenerate from './components/VariableGenerate';
 import Message from './components/Message';
+import Rules from './components/Rules';
 
 const arr=[];
 function gcd(a, b) {
@@ -21,22 +29,22 @@ function makeD(e,r) {
       break;
     }
   }
-   return ee;
+  return ee;
 }
 class App extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      p:undefined,
-      q:undefined,
-      e:undefined,
-      d:undefined,
-      n:undefined,
-      r:undefined,
+      p:0,
+      q:0,
+      e:0,
+      d:0,
+      n:0,
+      r:0,
       array:[]
     }
     this.handleSubmit = this.handleSubmit.bind(this);
-     this.handleSubmit2 = this.handleSubmit2.bind(this);
+    this.handleSubmit2 = this.handleSubmit2.bind(this);
   }
   handleSubmit2(event) {
     const dd =makeD(event.target.e.value, this.state.r);
@@ -47,40 +55,78 @@ class App extends React.Component {
     event.preventDefault();
   }
   handleSubmit(event) {
-      populateEArray((event.target.p.value-1)*(event.target.q.value-1));
-      this.setState({
-        p:event.target.p.value,
-        q:event.target.q.value,
-        n:event.target.p.value*event.target.q.value,
-        r:(event.target.p.value-1)*(event.target.q.value-1),
-        array:arr
-      })
+    populateEArray((event.target.p.value-1)*(event.target.q.value-1));
+    this.setState({
+      p:event.target.p.value,
+      q:event.target.q.value,
+      n:event.target.p.value*event.target.q.value,
+      r:(event.target.p.value-1)*(event.target.q.value-1),
+      array:arr
+    })
     event.preventDefault();
   }
   render() {
     return (
-      <div className="container">
-      <h1 className="text-center mt-4">RSA Calculator </h1>
-      <EDgenerate 
-      p={this.state.p}
-      q={this.state.q}
-      d={this.state.d}
-      n={this.state.n}
-      e={this.state.e}
-      r={this.state.r}
-      array={this.state.array}
-      handleSubmit={this.handleSubmit}
-      handleSubmit2={this.handleSubmit2}
-       />
-       <Message
-      p={this.state.p}
-      q={this.state.q}
-      d={this.state.d}
-      n={this.state.n}
-      e={this.state.e}
-      r={this.state.r} />
-      </div>
-      );
- }
+      <Router >
+      <div>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <Link className="navbar-brand" to='/'>RSA Calculator</Link>
+          <button 
+          className="navbar-toggler" 
+          type="button" 
+          data-toggle="collapse" 
+          data-target="#navbarTogglerDemo02" 
+          aria-controls="navbarTogglerDemo02" 
+          aria-expanded="false" 
+          aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>      
+          </button>
+
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul className="navbar-nav ml-auto">
+              <li className="nav-item active">
+                <Link className="nav-link" to='/'>Home</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to='/chat'>Message</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link" to='/rules'>Rules</Link>
+              </li>
+            </ul>
+          </div>
+        </nav> <Switch>
+        <Route path="/chat">
+        <Message
+        p={this.state.p}
+        q={this.state.q}
+        d={this.state.d}
+        n={this.state.n}
+        e={this.state.e}
+        r={this.state.r} />
+        </Route>
+        <Route path="/rules">
+        <Rules />
+        </Route>
+        <Route path="/">
+        <h1 className="text-center my-5">KEY GENERATION </h1>
+        <VariableGenerate 
+        p={this.state.p}
+        q={this.state.q}
+        d={this.state.d}
+        n={this.state.n}
+        e={this.state.e}
+        r={this.state.r}
+        array={this.state.array}
+        handleSubmit={this.handleSubmit}
+        handleSubmit2={this.handleSubmit2}
+        />
+        </Route>
+        </Switch>
+        </div>
+        </Router>
+        );
+  }
+
 }
 export default App;

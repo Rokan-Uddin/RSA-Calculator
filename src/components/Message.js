@@ -5,7 +5,6 @@ function mod( m, n )
 			return m - n*Math.floor(m/n)
 }
 function PowerMod(x,p,N)		
-		// Compute x^p mod N
 		{
 			msglist=[];
 			for(var i=0;i<x.length;i++) {
@@ -37,6 +36,12 @@ class Message extends React.Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleSubmit2 = this.handleSubmit2.bind(this);
 	}
+	warning(event) {
+		if(event===0) {
+			return <h5 className="text-center bg-danger m-4 p-3"> Please Input these value to Encrypt/Decrypt </h5>
+		}
+		
+	}
 	handleSubmit(event) {
 		this.setState({
 			enmsg:(PowerMod(event.target.msg.value,this.props.e,this.props.n)),
@@ -51,22 +56,41 @@ class Message extends React.Component {
 	}
 	render() { 
 		return(
-			<div className="container">
-			<div className="row">{this.props.p},{this.props.q},{this.props.e},{this.props.d} </div>
+			<div className="container mt-5">
+			<h1 className="text-center mt-3">Send/Receive Message </h1>
+			<h5 className="text-center">Using these value : </h5>
+			<div className="row justify-content-center text-center m-4">
+			<div className="col-6 col-sm-3 card p-3"><h3>p : {this.props.p} </h3></div>
+			 <div className="col-6 col-sm-3 card p-3"><h3>q : {this.props.q} </h3></div>
+			<div className="col-6 col-sm-3 card p-3"><h3>e : {this.props.e} </h3></div>
+			<div className="col-6 col-sm-3 card p-3"><h3>d : {this.props.d} </h3></div>
+			</div>
 
-			<form onSubmit={this.handleSubmit} >
-			<input name="msg" placeholder="Enter Message" />
-			<input type="submit" value="Submit" />
-			</form>
+			{this.warning(this.props.e)}
 
-			<div> {this.state.enmsg} </div>
-
-			<form onSubmit={this.handleSubmit2} >
-			<input name="msg" placeholder="Enter Message" />
-			<input type="submit" value="Submit" />
-			</form>
-
-			<div> {this.state.demsg} </div>
+			<div className="row justify-content-center m-4 mt-5">
+				<div className="col-12 col-sm-6 card" >
+					<form className="row justify-content-center" onSubmit={this.handleSubmit} >
+						<input className="col-12 col-sm-9 p-3 text-center"  name="msg" placeholder="Enter Message" />
+						<input className="col-12 col-sm-3 p-3" type="submit" value="Encrypt" />
+					</form>
+					<div className="row ml-2 mt-5">
+						 <label>Encrypted Message: <div>{this.state.enmsg} </div> </label>
+						
+					 </div>
+				 </div>
+			</div>
+			<div className="row justify-content-center m-4 mt-5">
+							<div className="col-12 col-sm-6 card ">
+					<form className=" row justify-content-center" onSubmit={this.handleSubmit2} >
+						<input className="col-12 col-sm-9 p-3 text-center" name="msg" placeholder="Enter Encrypted Message" />
+						<input className="col-12 col-sm-3 p-3" type="submit" value="Decrypt" />
+					</form>
+					<div className="row ml-2 mt-5">
+						<label>Decrypted Message: <div><h3> {this.state.demsg} </h3></div> </label>
+					</div>			
+				</div>
+			</div>
 			</div>
 			);
 	}
