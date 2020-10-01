@@ -19,20 +19,39 @@ function Warning(e){
 			</div>
 			)
 	}
+	else if(e.SameValueError) {
+		return(
+			<div className="bg-danger">
+				<h3 className="text-center p-2">P and Q should be distinct Number</h3>
+			</div>
+		)
+	}
 	else {
 		return('');
 	}
 	
 }
-class VariableGenerate extends React.Component  {
+class KeyGenerate extends React.Component  {
 	constructor(props) {
 		super(props);
 		this.state={
-			Prime:true
+			Prime:true,
+			previous_value:-1,
+			SameValueError:false
 	}
 	this.isPrime = this.isPrime.bind(this);
 }
 isPrime(event) {
+	console.log(event.target.value, this.state.previous_value);
+	if(this.state.previous_value== -1){
+		this.setState({previous_value:event.target.value})
+	}
+	if(this.state.previous_value == event.target.value) {
+		this.setState({SameValueError:true})
+	}
+	if(this.state.previous_value != event.target.value) {
+		this.setState({SameValueError:false})
+	}
 	for(var i = 2; i < event.target.value; i++) {
 		if(event.target.value % i === 0) {
 			this.setState({
@@ -60,7 +79,7 @@ isPrime(event) {
 				<div className="row m-4 justify-content-center">
 				<h5 className="text-center">Step 1: Choose Two different random large prime Number P & Q: </h5>
 				</div>
-				<Warning checkprime={this.state.Prime} />
+				<Warning checkprime={this.state.Prime} SameValueError={this.state.SameValueError} />
 				<div className="row justify-content-center mx-4">
 					<form className="row justify-content-center" onSubmit={this.props.handleSubmit} >
 						<input className="col-12 m-2 text-center"  name="p" placeholder="Enter P" onChange={this.isPrime} />
@@ -86,4 +105,4 @@ isPrime(event) {
 			);
 	}
 }
-export default VariableGenerate;
+export default KeyGenerate;

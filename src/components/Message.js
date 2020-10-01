@@ -38,7 +38,7 @@ class Message extends React.Component {
 	}
 	warning(event) {
 		if(event===0) {
-			return <h5 className="text-center bg-danger m-4 p-3"> Please Input these value to Encrypt/Decrypt </h5>
+			return <h5 className="text-center bg-danger m-4 p-3"> Encrypt/Decrypt isn't working without perfect value of p,q,e,d </h5>
 		}
 		
 	}
@@ -60,10 +60,9 @@ class Message extends React.Component {
 			<h1 className="text-center mt-3">Send/Receive Message </h1>
 			<h5 className="text-center">Using these value : </h5>
 			<div className="row justify-content-center text-center m-4">
-			<div className="col-6 col-sm-3 card p-3"><h3>p : {this.props.p} </h3></div>
-			 <div className="col-6 col-sm-3 card p-3"><h3>q : {this.props.q} </h3></div>
-			<div className="col-6 col-sm-3 card p-3"><h3>e : {this.props.e} </h3></div>
-			<div className="col-6 col-sm-3 card p-3"><h3>d : {this.props.d} </h3></div>
+			 <div className="col-6 col-sm-4 card p-3"><h3>n : {this.props.n} </h3></div>
+			<div className="col-6 col-sm-4 card p-3"><h3>e : {this.props.e} </h3></div>
+			<div className="col-6 col-sm-4 card p-3"><h3>d : {this.props.d} </h3></div>
 			</div>
 
 			{this.warning(this.props.e)}

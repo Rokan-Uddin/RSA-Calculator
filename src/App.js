@@ -7,7 +7,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import VariableGenerate from './components/VariableGenerate';
+import KeyGenerate from './components/KeyGenerate';
 import Message from './components/Message';
 import Rules from './components/Rules';
 
@@ -31,6 +31,18 @@ function makeD(e,r) {
   }
   return ee;
 }
+function MessageButton(req){
+  if(req.d>0) { 
+  return(
+    <div className="row justify-content-center">
+    <Link className=" col-6 col-sm-2 nav-link text-center mb-5 btn-dark" type="button" to='/chat'>Test Messaging</Link>
+    </div>
+    )
+  }
+  else {
+    return('');
+  }
+ }
 class App extends React.Component {
   constructor(props){
     super(props);
@@ -69,7 +81,7 @@ class App extends React.Component {
     return (
       <Router >
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+         <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
           <Link className="navbar-brand" to='/'>RSA Calculator</Link>
           <button 
           className="navbar-toggler" 
@@ -91,11 +103,14 @@ class App extends React.Component {
                 <Link className="nav-link" to='/chat'>Message</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to='/rules'>Rules</Link>
+                <Link className="nav-link"  to='/rules'>Rules</Link>
+              </li>
+              <li className="nav-item">
               </li>
             </ul>
           </div>
-        </nav> <Switch>
+        </nav>
+     <Switch>
         <Route path="/chat">
         <Message
         p={this.state.p}
@@ -110,7 +125,7 @@ class App extends React.Component {
         </Route>
         <Route path="/">
         <h1 className="text-center my-5">KEY GENERATION </h1>
-        <VariableGenerate 
+        <KeyGenerate 
         p={this.state.p}
         q={this.state.q}
         d={this.state.d}
@@ -120,7 +135,9 @@ class App extends React.Component {
         array={this.state.array}
         handleSubmit={this.handleSubmit}
         handleSubmit2={this.handleSubmit2}
-        />
+        /> {
+        }
+        <MessageButton d={this.state.d} />
         </Route>
         </Switch>
         </div>
