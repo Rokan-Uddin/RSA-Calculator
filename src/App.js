@@ -18,7 +18,9 @@ function gcd(a, b) {
 }
 
 function populateEArray(r) {
-  for (var i = 2; i < r; ++i) {
+  var rr=r;
+  if(rr>20) rr=200;
+  for (var i = 2; i < rr; ++i) {
     if (gcd(i, r) === 1) arr.push(i+" ");
   }
 }
@@ -143,6 +145,7 @@ class App extends React.Component {
         </div>
         </Router>
         );
+
   }
 
 }
