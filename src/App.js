@@ -143,6 +143,9 @@ class App extends React.Component {
         </Route>
         </Switch>
         </div>
+        <div className="text-white bg-dark">
+          <h6 className="text-center p-2">Developed By Rokan Uddin </h6>
+        </div>
         </Router>
         );
 

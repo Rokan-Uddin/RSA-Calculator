@@ -31,7 +31,8 @@ class Message extends React.Component {
 		this.state={
 			msg:[],
 			enmsg:[],
-			demsg:[]
+			demsg:[],
+			demsgvalue:[]
 		}
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleSubmit2 = this.handleSubmit2.bind(this);
@@ -40,19 +41,25 @@ class Message extends React.Component {
 		if(event===0) {
 			return <h5 className="text-center bg-danger m-4 p-3"> Encrypt/Decrypt isn't working without perfect value of p,q,e,d </h5>
 		}
+		if(this.state.enmsg.length>0 && this.state.demsg.length>0 && this.state.demsg[0] !== this.state.msg[0] )
+		{
+			return <h5 className="text-center bg-danger m-4 p-3">Not working.Please change the value of p,q. These are too much large </h5>
+		}
 		
 	}
 	handleSubmit(event) {
 		this.setState({
+			msg:event.target.msg.value,
 			enmsg:(PowerMod(event.target.msg.value,this.props.e,this.props.n)),
 		})	
-		event.preventDefault();
+	event.preventDefault();
 	}
-		handleSubmit2(event) {
+	handleSubmit2(event) {
+
 		this.setState({
 			demsg:(PowerMod(event.target.msg.value,this.props.d,this.props.n))
-		})
-		event.preventDefault();
+	})
+	event.preventDefault();
 	}
 	render() { 
 		return(
@@ -90,6 +97,7 @@ class Message extends React.Component {
 					</div>			
 				</div>
 			</div>
+			<warning />
 			</div>
 			);
 	}
